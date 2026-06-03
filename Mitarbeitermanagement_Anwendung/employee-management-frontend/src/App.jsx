@@ -1,10 +1,10 @@
-import HelloWorld from './HelloWorld';
 import './App.css';
+import ListEmployeeComponent from './components/ListEmployeeComponent';
 
 function App() {
   return (
     <>
-      <HelloWorld />
+      <ListEmployeeComponent />
     </>
   );
 }
