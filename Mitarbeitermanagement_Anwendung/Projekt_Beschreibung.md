@@ -161,6 +161,12 @@ Wir werden zwei Projekte aufbauen:
 | 22 | JavaScript try, catch, and finally | [Link](https://www.rameshfadatare.com/javascript-tutorial/javascript-try-catch-and-finally/) |
 
 ---
+### JavaScript BOM (nur das Noetigste)
+
+| Nr | Titel | Wofuer im Projekt | Link |
+|---|---|---|---|
+| 23 | **JavaScript Window Object** ⭐ | window.confirm() beim Loeschen, alert() | [Link](https://www.rameshfadatare.com/javascript-tutorial/javascript-window-object/) |
+| 24 | **JavaScript Document Object** ⭐ | DOM-Grundverstaendnis (React baut darauf auf) | [Link](https://www.rameshfadatare.com/javascript-tutorial/javascript-document-object/) |
 
 ## PHASE 3 — Java Grundlagen
 
