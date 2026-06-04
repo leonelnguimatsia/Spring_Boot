@@ -87,4 +87,41 @@ public class EmployeeController {
         // Liste mit Status 200 zurückgeben
         return ResponseEntity.ok(employees);
     }
+
+    /**
+     * Aktualisiert einen vorhandenen Mitarbeiter anhand seiner ID (HTTP PUT).
+     *
+     * <p>Endpunkt: {@code PUT /api/employees/{id}}</p>
+     *
+     * @param employeeId     die ID des zu aktualisierenden Mitarbeiters (aus der URL)
+     * @param updateEmployee JSON-Body mit den neuen Mitarbeiterdaten
+     * @return den aktualisierten Mitarbeiter als DTO mit HTTP-Status 200 (OK)
+     */
+    @PutMapping("{id}") // HTTP PUT /api/employees/{id}
+    public ResponseEntity<EmployeeDto> updateEmployee(@PathVariable("id") Long employeeId, @RequestBody EmployeeDto updateEmployee) {
+
+        // Aktualisierung an den Service delegieren
+        EmployeeDto updatedEmployee = employeeService.updateEmployee(employeeId, updateEmployee);
+
+        // Aktualisierten Mitarbeiter mit Status 200 zurückgeben
+        return new ResponseEntity<>(updatedEmployee, HttpStatus.OK);
+    }
+
+    /**
+     * Löscht einen Mitarbeiter anhand seiner ID (HTTP DELETE).
+     *
+     * <p>Endpunkt: {@code DELETE /api/employees/{id}}</p>
+     *
+     * @param employeeId die ID des zu löschenden Mitarbeiters (aus der URL)
+     * @return Bestätigungsmeldung als String mit HTTP-Status 200 (OK)
+     */
+    @DeleteMapping("{id}") // HTTP DELETE /api/employees/{id}
+    public ResponseEntity<String> deleteEmployee(@PathVariable("id") Long employeeId) {
+
+        // Löschvorgang an den Service delegieren
+        employeeService.deleteEmployee(employeeId);
+
+        // Erfolgsmeldung mit Status 200 zurückgeben
+        return ResponseEntity.ok("Employee has been deleted successfully!!");
+    }
 }

@@ -45,4 +45,23 @@ public interface EmployeeService {
      * @return Liste von DTOs aller Mitarbeiter (leer, wenn keine vorhanden)
      */
     List<EmployeeDto> getAllEmployees();
+
+
+    /**
+     * Aktualisiert die Daten eines vorhandenen Mitarbeiters.
+     *
+     * @param employeeId  die eindeutige ID des zu aktualisierenden Mitarbeiters
+     * @param employeeDto DTO mit den neuen Mitarbeiterdaten
+     * @return DTO des aktualisierten Mitarbeiters
+     */
+    EmployeeDto updateEmployee(Long employeeId, EmployeeDto employeeDto);
+
+    /**
+     * Löscht einen Mitarbeiter anhand seiner ID aus der Datenbank.
+     *
+     * @param employeeId die eindeutige ID des zu löschenden Mitarbeiters
+     * @throws net.javaspringboot.employee.management.backend.exception.RessourceNotFoundException
+     *         wenn kein Mitarbeiter mit der gegebenen ID existiert
+     */
+    void deleteEmployee(Long employeeId);
 }

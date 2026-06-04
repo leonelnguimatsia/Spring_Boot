@@ -88,4 +88,47 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .map((employee) -> EmployeeMapper.mapToEmployeeDto(employee))
                 .collect(Collectors.toList());
     }
+
+    /**
+     * Aktualisiert die Daten eines vorhandenen Mitarbeiters.
+     *
+     * @param employeeId  ID des zu aktualisierenden Mitarbeiters
+     * @param employeeDto DTO mit den neuen Mitarbeiterdaten
+     * @return DTO des aktualisierten Mitarbeiters
+     */
+    @Override
+    public EmployeeDto updateEmployee(Long employeeId, EmployeeDto employeeDto) {
+
+        // Mitarbeiter anhand der ID suchen, Fehler werfen falls nicht gefunden
+        Employee employee = employeeRepository.findById(employeeId).orElseThrow(
+                ()-> new RessourceNotFoundException("Employee is not exists with given id:" + employeeId)
+        );
+
+        // Felder mit den neuen Werten überschreiben
+        employee.setFirstName(employeeDto.getFirstName());
+        employee.setLastName(employeeDto.getLastName());
+        employee.setEmail(employeeDto.getEmail());
+
+        // Aktualisierten Mitarbeiter speichern und als DTO zurückgeben
+        Employee updateEmployeeObj = employeeRepository.save(employee);
+        return EmployeeMapper.mapToEmployeeDto(updateEmployeeObj);
+    }
+
+    /**
+     * Löscht einen Mitarbeiter anhand seiner ID aus der Datenbank.
+     *
+     * @param employeeId ID des zu löschenden Mitarbeiters
+     * @throws RessourceNotFoundException wenn kein Mitarbeiter mit der gegebenen ID existiert
+     */
+    @Override
+    public void deleteEmployee(Long employeeId) {
+
+        // Mitarbeiter anhand der ID suchen, Fehler werfen falls nicht gefunden
+        Employee employee = employeeRepository.findById(employeeId).orElseThrow(
+                ()-> new RessourceNotFoundException("Employee is not exists with given id:" + employeeId)
+        );
+
+        // Mitarbeiter aus der Datenbank löschen
+        employeeRepository.delete(employee);
+    }
 }
