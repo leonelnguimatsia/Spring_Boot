@@ -40,6 +40,11 @@ function App() {
           <Route path="/employees" element={<ListEmployeeComponent />}></Route>
           {/* http://localhost:3000/add-employee — zeigt die Seite zum Hinzufügen eines neuen Mitarbeiters an */}
           <Route path="/add-employee" element={<EmployeeComponent />}></Route>
+          {/* http://localhost:3000/edit-employee/1 — zeigt die Seite zum Aktualisieren eines bestehenden Mitarbeiters an */}
+          <Route
+            path="/edit-employee/:id"
+            element={<EmployeeComponent />}
+          ></Route>
         </Routes>
 
         {/* Footer unten auf der Seite anzeigen */}

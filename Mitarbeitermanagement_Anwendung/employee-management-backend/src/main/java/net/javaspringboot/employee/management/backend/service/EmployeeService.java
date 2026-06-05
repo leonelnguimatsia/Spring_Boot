@@ -19,7 +19,7 @@ import java.util.List;
  * <p>Definiert den Vertrag (die Methoden) für alle Operationen rund um Mitarbeiter.
  * Die konkrete Implementierung erfolgt in {@link net.javaspringboot.employee.management.backend.service.impl.EmployeeServiceImpl}.</p>
  */
-public interface EmployeeService {
+public interface  EmployeeService {
 
     /**
      * Erstellt einen neuen Mitarbeiter und speichert ihn in der Datenbank.

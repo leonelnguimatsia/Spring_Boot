@@ -21,3 +21,18 @@ export const listEmployees = () => {
 export const createEmployee = (employee) => {
   return axos.post(REST_API_URL, employee);
 };
+
+/* Sendet eine Update-Anfrage an das Backend, um einen bestehenden Mitarbeiter zu aktualisieren */
+export const updateEmployee = (employee, employeeId) => {
+  return axos.put(`${REST_API_URL}/${employeeId}`, employee);
+};
+
+/* Sendet eine GET-Anfrage an das Backend, um einen Mitarbeiter anhand seiner ID abzurufen */
+export const getEmployee = (employeeId) => {
+  return axos.get(`${REST_API_URL}/${employeeId}`);
+};
+
+/* Sendet eine DELETE-Anfrage an das Backend, um einen Mitarbeiter anhand seiner ID zu löschen */
+export const deleteEmployee = (employeeId) => {
+  return axos.delete(`${REST_API_URL}/${employeeId}`);
+};
