@@ -70,11 +70,11 @@ const ListEmployeeComponent = () => {
       <table className="table table-bordered table-striped">
         <thead>
           <tr>
-            <th>Employee Id</th>
-            <th>Employee First Name</th>
-            <th>Employee Last Name</th>
-            <th>Employee Email Id</th>
-            <th>Actions</th>
+            <th className="text-center">Employee Id</th>
+            <th className="text-center">Employee First Name</th>
+            <th className="text-center">Employee Last Name</th>
+            <th className="text-center">Employee Email Id</th>
+            <th className="text-center">Actions</th>
           </tr>
         </thead>
 
@@ -82,11 +82,11 @@ const ListEmployeeComponent = () => {
         <tbody>
           {employees.map((employee) => (
             <tr key={employee.id}>
-              <td>{employee.id}</td>
-              <td>{employee.firstName}</td>
-              <td>{employee.lastName}</td>
-              <td>{employee.email}</td>
-              <td>
+              <td className="text-center">{employee.id}</td>
+              <td className="text-center">{employee.firstName}</td>
+              <td className="text-center">{employee.lastName}</td>
+              <td className="text-center">{employee.email}</td>
+              <td className="text-center">
                 {/* Button zum Bearbeiten — navigiert zur Edit-Seite mit der Mitarbeiter-ID */}
                 <button
                   className="btn btn-info"
@@ -101,6 +101,14 @@ const ListEmployeeComponent = () => {
                   style={{ marginLeft: '10px' }}
                 >
                   Delete
+                </button>
+                {/* Button zum Anzeigen der Mitarbeiterdetails — navigiert zur Detailseite mit der Mitarbeiter-ID */}
+                <button
+                  className="btn btn-info"
+                  style={{ marginLeft: '10px' }}
+                  onClick={() => navigator(`/view-employee/${employee.id}`)}
+                >
+                  View
                 </button>
               </td>
             </tr>

@@ -191,6 +191,14 @@ export const EmployeeComponent = () => {
               <button className="btn btn-success" onClick={savedEmployee}>
                 Submit
               </button>
+              {/* Abbrechen und zur Mitarbeiterliste zurückkehren */}
+              <button
+                className="btn btn-danger"
+                onClick={() => navigator('/employees')}
+                style={{ marginLeft: '10px' }}
+              >
+                Cancel
+              </button>
             </form>
           </div>
         </div>

@@ -21,6 +21,9 @@ import { FooterComponent } from './components/FooterComponent';
 /* Seite zum Hinzufügen eines neuen Mitarbeiters */
 import { EmployeeComponent } from './components/EmployeeComponent';
 
+/* Seite zum Anzeigen der Details eines Mitarbeiters */
+import { ViewEmployeeComponent } from './components/ViewEmployeeComponent';
+
 /* Routing-Anbieter für die Navigation */
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -44,6 +47,11 @@ function App() {
           <Route
             path="/edit-employee/:id"
             element={<EmployeeComponent />}
+          ></Route>
+          {/* http://localhost:3000/view-employee/1 — zeigt die Seite zum Anzeigen der Details eines Mitarbeiters an */}
+          <Route
+            path="/view-employee/:id"
+            element={<ViewEmployeeComponent />}
           ></Route>
         </Routes>
 
