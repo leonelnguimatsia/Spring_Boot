@@ -10,7 +10,11 @@
 import axos from 'axios';
 
 // Basis-URL des Spring Boot Backends
-const REST_API_URL = 'http://localhost:8080/api/employees';
+//const REST_API_URL = 'https://springboot-production-77d6.up.railway.app/api/employees';
+
+// Basis-URL des Spring Boot Backends
+const REST_API_URL =
+  'https://springboot-production-77d6.up.railway.app/api/employees';
 
 /* Sendet eine GET-Anfrage an das Backend und gibt alle Mitarbeiter zurück */
 export const listEmployees = () => {

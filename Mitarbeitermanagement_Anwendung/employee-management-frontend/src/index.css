@@ -1,9 +1,11 @@
 .footer {
-  position: absolute;
+  position: fixed;   /* fixed: immer am unteren Rand des Bildschirms */
   bottom: 0;
+  left: 0;           /* left: 0 → bündig am linken Rand auf Handy */
   width: 100%;
   height: 50px;
   background-color: black;
   text-align: center;
   color: white;
+  line-height: 50px; /* Text vertikal zentrieren */
 }

@@ -7,9 +7,8 @@
 # Einstiegspunkt: java -jar employee-management-backend.jar
 # ============================================================
 
-# Java-Version als Build-Argument (Standard: 17)
 # Basis-Image mit Java 17
-FROM eclipse-temurin:17-jdk-alpine
+FROM eclipse-temurin:17-jre-alpine
 
 # Verantwortlicher Entwickler / Maintainer dieses Images
 LABEL maintainer="leonel.nguimatsia"
