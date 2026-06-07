@@ -20,7 +20,7 @@ export const HeaderComponent = () => {
           <div className="container-fluid justify-content-center">
             {/* Link zur GitHub-Seite des Autors — text-center zentriert auf Handy */}
             <a
-              className="navbar-brand text-center"
+              className="navbar-brand w-100 text-center"
               href="https://github.com/leonelnguimatsia"
               target="_blank"
               rel="noreferrer"

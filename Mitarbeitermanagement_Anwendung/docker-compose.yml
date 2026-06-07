@@ -14,7 +14,7 @@ services:
   # ── Service 1: Datenbank ─────────────────────────────
   mysql:
     # Offizielles MySQL-Image aus Docker Hub
-    image: mysql:latest
+    image: mysql:8.0
     # Fester Container-Name für einfache Identifikation
     container_name: mysql
     environment:
