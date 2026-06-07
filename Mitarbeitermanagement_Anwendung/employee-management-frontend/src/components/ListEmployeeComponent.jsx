@@ -66,7 +66,8 @@ const ListEmployeeComponent = () => {
         Add Employee
       </button>
 
-      {/* Tabelle zur Anzeige aller Mitarbeiter */}
+      {/* table-responsive: Tabelle scrollt horizontal auf Handy, nicht die ganze Seite */}
+      <div className="table-responsive">
       <table className="table table-bordered table-striped">
         <thead>
           <tr>
@@ -115,6 +116,7 @@ const ListEmployeeComponent = () => {
           ))}
         </tbody>
       </table>
+      </div>
     </div>
   );
 };
