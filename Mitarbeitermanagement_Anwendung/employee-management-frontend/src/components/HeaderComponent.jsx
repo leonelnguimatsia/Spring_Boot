@@ -15,12 +15,13 @@ export const HeaderComponent = () => {
     <div>
       <header>
         {/* Dunkle Bootstrap-Navbar */}
-        <nav className="navbar navbar-dark bg-dark w-100">
+        <nav className="navbar navbar-dark bg-dark">
           {/* container-fluid: füllt die volle Breite auf allen Geräten */}
-          <div className="container-fluid justify-content-center">
+          <div className="container-fluid d-flex justify-content-center">
             {/* Link zur GitHub-Seite des Autors — text-center zentriert auf Handy */}
             <a
-              className="navbar-brand w-100 text-center"
+              className="navbar-brand mb-0 text-center"
+              style={{ marginRight: 0 }}
               href="https://github.com/leonelnguimatsia"
               target="_blank"
               rel="noreferrer"
