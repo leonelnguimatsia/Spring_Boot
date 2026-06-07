@@ -1,0 +1,85 @@
+#======================================================
+# Projekt    : Mitarbeitermanagement-Anwendung
+# Datei      : mitarbeiter_anwendung.yml
+# Ordner     : Mitarbeitermanagement_Anwendung (Root)
+# Autor      : Leonel Nguimatsia
+# Version    : 1.0
+# Datum      : 2026
+#======================================================
+
+# Docker Compose definiert alle drei Dienste der Anwendung:
+# mysql (Datenbank) → backend (Spring Boot) → frontend (React/Nginx)
+
+services:
+  # ── Service 1: Datenbank ─────────────────────────────
+  mysql:
+    # Offizielles MySQL-Image aus Docker Hub
+    image: mysql:latest
+    # Fester Container-Name für einfache Identifikation
+    container_name: mysql
+    environment:
+      # Root-Passwort für den MySQL-Administrator
+      MYSQL_ROOT_PASSWORD: ${DB_MYSQL_PASSWORD}
+      # Datenbank wird beim Start automatisch erstellt, falls sie nicht existiert
+      MYSQL_DATABASE: ems
+    ports:
+      # Host-Port 3307 → Container-Port 3306 (Standard-MySQL-Port)
+      # Format: 'HOST:CONTAINER'
+      - '3307:3306'
+    volumes:
+      # Benanntes Volume: MySQL-Daten bleiben erhalten, auch wenn der Container neu gestartet wird
+      # Ohne dieses Volume gehen alle Daten beim Container-Stopp verloren
+      - mysql_data:/var/lib/mysql
+    # Healthcheck: Prüft alle 10 Sekunden, ob MySQL wirklich bereit ist
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Service 2: Backend ───────────────────────────────
+  backend:
+    build:
+      # Pfad zum Backend-Verzeichnis mit dem Quellcode
+      context: ./employee-management-backend
+      # Dockerfile, das für den Build verwendet wird
+      dockerfile: DockerFile.backend
+    # Fester Container-Name für einfache Identifikation
+    container_name: employee-management-backend
+    ports:
+      # Host-Port 8080 → Container-Port 8080 (Standard Spring Boot Port)
+      - '8080:8080'
+    depends_on:
+      # Backend startet erst, nachdem MySQL-Container GESUND ist (nicht nur gestartet)
+      mysql:
+        condition: service_healthy
+    environment:
+      # JDBC-URL: 'mysql' ist der Service-Name oben → Docker löst ihn intern auf
+      # Kein 'localhost' verwenden — Container kommunizieren über Service-Namen
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/ems
+      # Datenbankbenutzer (muss mit MYSQL_ROOT_PASSWORD übereinstimmen)
+      SPRING_DATASOURCE_USERNAME: root
+      # Passwort aus einer .env-Datei lesen (nicht im Code speichern!)
+      SPRING_DATASOURCE_PASSWORD: ${DB_MYSQL_PASSWORD}
+
+  # ── Service 3: Frontend ──────────────────────────────
+  frontend:
+    build:
+      # Pfad zum Frontend-Verzeichnis mit dem React-Quellcode
+      context: ./employee-management-frontend
+      # Dockerfile für den Multi-Stage-Build (Node → Nginx)
+      dockerfile: DockerFile.frontend
+    # Fester Container-Name für einfache Identifikation
+    container_name: employee-management-frontend
+    ports:
+      # Host-Port 3000 → Container-Port 80 (Nginx lauscht intern auf Port 80)
+      - '3000:80'
+    depends_on:
+      # Frontend startet erst, nachdem Backend-Container gestartet ist
+      - backend
+
+# ── Benannte Volumes ─────────────────────────────────
+# Volumes müssen hier deklariert werden, damit Docker Compose sie verwalten kann
+volumes:
+  # Persistenter Speicher für MySQL-Daten (überlebt Container-Neustarts)
+  mysql_data:

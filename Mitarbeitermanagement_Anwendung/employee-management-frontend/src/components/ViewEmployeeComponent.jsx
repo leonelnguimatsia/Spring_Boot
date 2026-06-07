@@ -1,3 +1,12 @@
+/*======================================================
+ * Projekt    : Mitarbeitermanagement-Anwendung          *
+ * Datei      : ViewEmployeeComponent.jsx                *
+ * Ordner     : components                               *
+ * Autor      : Leonel Nguimatsia                        *
+ * Version    : 1.0                                      *
+ * Datum      : 2026                                     *
+ *======================================================*/
+
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getEmployee } from '../services/EmployeeService';

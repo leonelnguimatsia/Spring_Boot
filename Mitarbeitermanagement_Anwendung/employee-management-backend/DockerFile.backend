@@ -1,0 +1,21 @@
+
+# ============================================================
+# Dockerfile – Employee Management Backend
+# ============================================================
+# Basis-Image:  OpenJDK (Version wird per Build-Argument gesetzt)
+# Artefakt:     employee-management-backend-0.0.1-SNAPSHOT.jar
+# Einstiegspunkt: java -jar employee-management-backend.jar
+# ============================================================
+
+# Java-Version als Build-Argument (Standard: 17)
+# Basis-Image mit Java 17
+FROM eclipse-temurin:17-jdk-alpine
+
+# Verantwortlicher Entwickler / Maintainer dieses Images
+LABEL maintainer="leonel.nguimatsia"
+
+# Kompiliertes JAR aus dem target/-Verzeichnis ins Image kopieren
+COPY target/employee-management-backend-0.0.1-SNAPSHOT.jar employee-management-backend.jar
+
+# Anwendung beim Container-Start ausführen
+ENTRYPOINT ["java", "-jar", "employee-management-backend.jar"]

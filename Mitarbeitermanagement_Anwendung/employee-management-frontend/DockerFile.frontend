@@ -1,0 +1,47 @@
+#======================================================
+# Projekt    : Mitarbeitermanagement-Anwendung
+# Datei      : DockerFile.frontend
+# Ordner     : employee-management-frontend
+# Autor      : Leonel Nguimatsia
+# Version    : 1.0
+# Datum      : 2026
+#======================================================
+
+# ── Stage 1: Build ───────────────────────────────────
+# Node.js Alpine-Image als leichtgewichtige Build-Umgebung
+FROM node:20-alpine AS build
+
+# Arbeitsverzeichnis im Container setzen
+WORKDIR /employee-management-frontend
+
+# package.json und package-lock.json zuerst kopieren (Layer-Cache nutzen)
+COPY package*.json ./
+
+# Native Build-Tools für npm-Pakete mit C++-Abhängigkeiten installieren
+RUN apk add --no-cache python3 make g++
+
+# Abhängigkeiten exakt gemäß package-lock.json installieren (kein Update)
+RUN npm ci
+
+# Restlichen Quellcode in den Container kopieren
+COPY . .
+
+# React-Anwendung für Produktion bauen (Output: /build)
+RUN npm run build
+
+
+# ── Stage 2: Server ───────────────────────────────────
+# Schlankes Nginx-Image zum Ausliefern der statischen Dateien
+FROM nginx:1.27-alpine
+
+# Eigene Nginx-Konfiguration einbinden (z. B. für React-Router-Support)
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Build-Artefakte aus Stage 1 ins Nginx-Webverzeichnis kopieren
+COPY --from=build /employee-management-frontend/dist /usr/share/nginx/html
+
+# Port 80 für eingehende HTTP-Anfragen freigeben
+EXPOSE 80
+
+# Nginx im Vordergrund starten (damit Docker den Prozess überwachen kann)
+CMD ["nginx", "-g", "daemon off;"]
