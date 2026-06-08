@@ -1,0 +1,47 @@
+/* Diagramme: nicht schneiden, auf einer Seite bleiben */
+pre:has(.mermaid),
+.mermaid {
+  page-break-inside: avoid;
+  break-inside: avoid;
+  overflow: visible;
+  width: 100%;
+}
+
+/* Tabellen: dürfen über mehrere Seiten gehen */
+table {
+  page-break-inside: auto;
+  break-inside: auto;
+}
+
+/* Tabellenzeilen: nicht mitten in einer Zeile schneiden */
+tr {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+/* Überschriften: nie allein am Seitenende */
+h1,
+h2,
+h3 {
+  page-break-after: avoid;
+  break-after: avoid;
+}
+
+/* Mermaid-Diagramme zentrieren */
+.mermaid {
+  display: flex;
+  justify-content: center;
+}
+
+/* Tabellen zentrieren */
+table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Bilder zentrieren */
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
